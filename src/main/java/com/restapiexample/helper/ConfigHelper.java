@@ -2,25 +2,16 @@ package com.restapiexample.helper;
 
 import java.io.FileInputStream;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.nio.charset.StandardCharsets;
-import java.util.PropertyResourceBundle;
-import java.util.ResourceBundle;
+import java.util.Properties;
 
 public class ConfigHelper {
-    public static ResourceBundle readProp(String systemSourcesDir) {
-
-        ResourceBundle bundle = null;
-        try {
-            String propertyDir = "/src/test/resources/properties/" + systemSourcesDir;
-            InputStream propertiesStream = new FileInputStream(System.getProperty("user.dir") + propertyDir);
-            bundle = new PropertyResourceBundle(new InputStreamReader(propertiesStream, StandardCharsets.UTF_8));
-            propertiesStream.close();
-
+    public static Properties readProp(String filePath) {
+        Properties properties = new Properties();
+        try (FileInputStream fis = new FileInputStream(filePath)) {
+            properties.load(fis);
         } catch (IOException e) {
-            throw new IllegalStateException("Exception on loading {" + systemSourcesDir + "} config file from classpath", e);
+            System.err.println("Error reading properties file: " + e.getMessage());
         }
-        return bundle;
+        return properties;
     }
 }

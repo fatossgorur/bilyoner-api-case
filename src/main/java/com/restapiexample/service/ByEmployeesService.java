@@ -6,13 +6,15 @@ import io.restassured.RestAssured;
 import io.restassured.response.Response;
 import io.restassured.specification.ResponseSpecification;
 
+import java.util.Properties;
 import java.util.ResourceBundle;
 
 public class ByEmployeesService extends RequestSpec {
-    public static ResourceBundle ConfigurationPropApi = ConfigHelper.readProp("api-config.properties");
+    public static Properties props = ConfigHelper.readProp("src/test/resources/api-config.properties");
+    public static String employeeApiUrl = props.getProperty("employee-api");
 
     public ByEmployeesService() {
-        super(ConfigurationPropApi.getString("apiUrl"));
+        super(employeeApiUrl);
     }
 
     public Response get(ResponseSpecification responseSpecification) {

@@ -11,23 +11,18 @@ import org.testng.annotations.Test;
 
 public class EmployeesTest {
     @Test
-    @Description("Control employee count")
-    public void check_employee_count() {
+    @Description("Control employee count, name and salary")
+    public void check_employee_count_name_and_salary() {
+        int employeeCount = 24;
+        int employeeSalary = 313500;
+        String employeeName = "Haley Kennedy";
         ByEmployeesService byEmployeesService = new ByEmployeesService();
         Response byEmployee = byEmployeesService.get(ResponseSpec.checkStatusCodeOk());
         EmployeesResponse employeesResponse = byEmployee.as(EmployeesResponse.class);
-        Assert.assertEquals(employeesResponse.getData().size(), 24);
-    }
-
-    @Test
-    @Description("Control employee name and salary")
-    public void check_employee_name_and_salary() {
-        ByEmployeesService byEmployeesService = new ByEmployeesService();
-        Response byEmployee = byEmployeesService.get(ResponseSpec.checkStatusCodeOk());
-        EmployeesResponse employeesResponse = byEmployee.as(EmployeesResponse.class);
+        Assert.assertEquals(employeesResponse.getData().size(), employeeCount);
         for (DataResponse data : employeesResponse.getData()) {
-            if (data.getEmployee_salary() == 313500) {
-                Assert.assertEquals(data.getEmployee_name(), "Haley Kennedy");
+            if (data.getEmployee_salary() == employeeSalary) {
+                Assert.assertEquals(data.getEmployee_name(), employeeName);
             }
         }
     }

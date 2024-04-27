@@ -1,38 +1,39 @@
 package com.restapiexample.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+
 import java.util.List;
 
 public class EmployeesResponse {
     @JsonProperty("status")
-    private String Status;
+    private String status;
     @JsonProperty("data")
-    private List<DataResponse> Data;
+    private List<DataResponse> data;
     @JsonProperty("message")
-    private String Message;
+    private String message;
 
     public String getStatus() {
-        return Status;
+        return status;
     }
 
     public void setStatus(String status) {
-        Status = status;
+        this.status = status;
     }
 
     public List<DataResponse> getData() {
-        return Data;
+        return data;
     }
 
     public void setData(List<DataResponse> data) {
-        Data = data;
+        this.data = data;
     }
 
     public String getMessage() {
-        return Message;
+        return message;
     }
 
     public void setMessage(String message) {
-        Message = message;
+        this.message = message;
     }
 }
 
